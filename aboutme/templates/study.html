@@ -1,0 +1,32 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block content %}
+
+<section class="row">
+    <p class="lead">Мое обучение</p>
+    <div class="col-md-9">
+        <div class="media">
+          <div class="media-left">
+            <a href="#">
+              <img class="media-object" style="width: 200px;" src="{% static "image/mainapp/school.gif" %}" alt="">
+            </a>
+          </div>
+          <div class="media-body">
+            <h4 class="media-heading">Школа №40</h4>
+            Школа №40 Приморского р-на Санкт-Петербурга
+          </div>
+        </div>
+        <div class="media">
+          <div class="media-left">
+            <a href="#">
+              <img class="media-object" style="width: 200px;" src="{% static "image/mainapp/univer.jpg" %}" alt="">
+            </a>
+          </div>
+          <div class="media-body">
+            <h4 class="media-heading">СПБГПУ</h4>
+            Санкт-Петербургский Государственный Политехнический Университет
+          </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

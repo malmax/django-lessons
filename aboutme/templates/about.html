@@ -1,0 +1,33 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block content %}
+
+<section class="row">
+    <p class="lead">Малахов Максим Анатольевич</p>
+    <div class="col-md-6 well">
+        <div class="row media">
+            <div class="col-md-6 media-left">
+                Год рождения:
+            </div>
+            <div class="col-md-4 col-md-offset-2 media-right">
+                1984
+            </div>
+            <div class="col-md-6">
+                Любимый вид спорта:
+            </div>
+            <div class="col-md-4 col-md-offset-2">
+                Лыжи, большой теннис
+            </div>
+            <div class="col-md-6">
+                Любимый фильм:
+            </div>
+            <div class="col-md-4 col-md-offset-2">
+                Форест Гамп
+            </div>
+        </div>
+    </div>
+    <figure class="col-md-3 col-md-offset-1">
+        <img src="{% static "image/mainapp/photo1.jpg" %}" class="img-responsive"/>
+    </figure>
+</section>
+{% endblock %}
