@@ -21,7 +21,7 @@ from mainapp.views import showWorkPage
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^$', showAboutPage),
-    url(r'^study/$', showStudyPage),
-    url(r'^work/$', showWorkPage)
+    url(r'^$', showAboutPage, name = 'home'),
+    url(r'^learn/$', showStudyPage, name = 'learn'),
+    url(r'^work/$', showWorkPage,name = 'work')
 ]

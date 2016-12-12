@@ -24,7 +24,7 @@
        <div id="navbar" class="collapse navbar-collapse">
          <ul class="nav navbar-nav">
              {% for link in menu %}
-                <li {% if link.active %} class="active" {% endif %}><a href="{{ link.url }}">{{ link.text }}</a></li>
+                <li {% if link.active %} class="active" {% endif %}><a href="{% url link.urlName %}">{{ link.text }}</a></li>
              {% endfor %}
          </ul>
        </div><!--/.nav-collapse -->

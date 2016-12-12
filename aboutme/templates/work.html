@@ -1,11 +1,17 @@
-{% extends 'index.html' %}
+{% extends 'base.html' %}
 {% load static %}
 {% block content %}
 
-    <div class="jumbotron">
+    <div >
         <h1>Моя работа</h1>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus iure laudantium magnam maxime nisi numquam possimus provident voluptatibus! Adipisci consectetur error fuga ipsa modi molestias optio praesentium totam voluptate voluptatum.</p>
-        <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
+        {% for w in works %}
+            <div class="panel panel-default">
+              <div class="panel-heading"><h4>{{ w.employer|default:"ООО 'Рога и Копыта'" }} <small>( c {{ w.startDate|date:"d M Y"|default:"Дата неизвестна" }} )</small></h4></div>
+              <div class="panel-body">
+                Работал в должности {{ w.title|default:"Менеджер" }}
+              </div>
+            </div>
+        {% endfor %}
     </div>
 
 {% endblock %}
