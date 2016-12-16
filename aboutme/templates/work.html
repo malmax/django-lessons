@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Информация о работе | {{ block.super }}
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+
+        <h1>Мои места работы
+            <small>({{ workPlaces|length }} мест работы)</small>
+        </h1>
+        {% if not workPlaces %}
+            Я еще нигде не работал
+        {% endif %}
+        {% for wp in workPlaces %}
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="well">
+                        <h3>{{ wp.place }}</h3>
+                        <p>{{ wp.post }}</p>
+                        <p>{{ wp.desc }}</p>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus iure laudantium magnam
+                            maxime nisi
+                            numquam possimus provident voluptatibus! Adipisci consectetur error fuga ipsa modi molestias
+                            optio
+                            praesentium totam voluptate voluptatum.</p>
+                        <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}
