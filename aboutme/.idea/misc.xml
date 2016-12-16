@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-<<<<<<< HEAD
   <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.5.2 (C:\Users\max\AppData\Local\Programs\Python\Python35-32\python.exe)" project-jdk-type="Python SDK" />
-=======
-  <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.5.2 (C:\Users\malma\AppData\Local\Programs\Python\Python35-32\python.exe) (1)" project-jdk-type="Python SDK" />
->>>>>>> 5b9e6c0b0a4570be83cea3b8d7da2f3a2ec53d6f
+  <component name="PythonCompatibilityInspectionAdvertiser">
+    <option name="version" value="1" />
+  </component>
 </project>
