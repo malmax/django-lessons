@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+<<<<<<< HEAD
 
 {% block title %}
     Информация о работе | {{ block.super }}
@@ -29,6 +30,18 @@
                         <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
                     </div>
                 </div>
+=======
+{% block content %}
+
+    <div >
+        <h1>Моя работа</h1>
+        {% for w in works %}
+            <div class="panel panel-default">
+              <div class="panel-heading"><h4>{{ w.employerName|default:"ООО 'Рога и Копыта'" }} <small>( c {{ w.startDate|date:"d M Y"|default:"Дата неизвестна" }} )</small></h4></div>
+              <div class="panel-body">
+                Работал в должности {{ w.title|default:"Менеджер" }}
+              </div>
+>>>>>>> 5b9e6c0b0a4570be83cea3b8d7da2f3a2ec53d6f
             </div>
         {% endfor %}
     </div>

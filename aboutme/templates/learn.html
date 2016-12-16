@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block content %}
+
+<section class="row">
+    <p class="lead">Мое обучение</p>
+    <div class="col-md-9">
+
+        {% for l in learn %}
+            <div class="media">
+              <div class="media-left">
+                <a href="{{ l.website|default:"#" }}" target="_blank">
+                    {% with 'image/mainapp/'|add:l.imgName as src_static %}
+                    <img class="media-object" style="width: 200px;" src="{% static src_static|default:"http://placehold.it/64x64" %}" alt="">
+                    {% endwith %}
+                </a>
+              </div>
+              <div class="media-body">
+                <h4 class="media-heading">{{ l.shortTitle|default:"Учебное заведение" }}</h4>
+                {{ l.longTitle|default:"Учебное заведение" }}
+              </div>
+            </div>
+        {% endfor %}
+
+    </div>
+</section>
+{% endblock %}
