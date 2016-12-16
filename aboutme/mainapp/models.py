@@ -35,14 +35,19 @@ def getAboutMeInfo():
     return data
 
 class Organization(models.Model):
-    title = models.CharField(max_length=100)
+    title = models.CharField(max_length=100, unique=True, db_index=True)
 
+    def __str__(self):
+        return self.title
 
 class Works(models.Model):
     organization = models.ForeignKey(Organization, null=True)
     employerName = models.CharField(max_length=30)
     startDate = models.DateField()
     title = models.CharField(max_length=30)
+
+    def __str__(self):
+        return self.employerName
 
 class Learns(models.Model):
     imgName = models.CharField(max_length=30)

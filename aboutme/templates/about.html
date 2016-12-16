@@ -1,22 +1,4 @@
 {% extends 'base.html' %}
-<<<<<<< HEAD
-{% load staticfiles %}
-
-{% block title %}
-    Главная страница | {{ block.super }}
-{% endblock %}
-
-{% block content %}
-<section class="row">
-    <p class="lead">{{ lastName|title }} {{ name|title }} {{ middleName|title }}</p>
-    <div class="col-md-6 well">
-        <div class="row media">
-            <div class="col-md-6 media-left">
-                Год рождения:
-            </div>
-            <div class="col-md-4 col-md-offset-2 media-right">
-                1984
-=======
 {% load static %}
 {% block content %}
 
@@ -29,27 +11,22 @@
             </div>
             <div class="col-md-4 col-md-offset-2 media-right">
                 {{ birthday|date:"d M Y"|default:"дата рождения" }}
->>>>>>> 5b9e6c0b0a4570be83cea3b8d7da2f3a2ec53d6f
+
             </div>
             <div class="col-md-6">
                 Любимый вид спорта:
             </div>
             <div class="col-md-4 col-md-offset-2">
-<<<<<<< HEAD
-                Лыжи, большой теннис
-=======
+
                 {{ hobby|join:", "|default:"нет" }}
->>>>>>> 5b9e6c0b0a4570be83cea3b8d7da2f3a2ec53d6f
+
             </div>
             <div class="col-md-6">
                 Любимый фильм:
             </div>
             <div class="col-md-4 col-md-offset-2">
-<<<<<<< HEAD
-                Форест Гамп
-=======
                 {{ likeFilm|join:", "|default:"нет" }}
->>>>>>> 5b9e6c0b0a4570be83cea3b8d7da2f3a2ec53d6f
+
             </div>
         </div>
     </div>

@@ -1,66 +1,16 @@
-{% load static %}
+{% load staticfiles %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<<<<<<< HEAD
-    <title>{% block title %} About Me {% endblock %}</title>
-
-=======
     <title>{{ title|default:"Обо мне" }}</title>
->>>>>>> 5b9e6c0b0a4570be83cea3b8d7da2f3a2ec53d6f
+
     <link rel="stylesheet" href="{% static "css/bootstrap.css" %}">
     <link rel="stylesheet" href="{% static "css/custom.css" %}">
 </head>
 <body>
-<<<<<<< HEAD
-<div class="container-fluid">
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
-                        aria-expanded="false" aria-controls="navbar">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="/">Личный блог</a>
-            </div>
-            <div id="navbar" class="collapse navbar-collapse">
-                <ul class="nav navbar-nav">
-                    {% for link in menu %}
-                        <li {% if link.active %} class="active" {% endif %}><a
-                                href="{% url link.url %}">{{ link.text }}</a></li>
-                    {% endfor %}
-                </ul>
-            </div><!--/.nav-collapse -->
-        </div>
-    </nav>
-</div>
-<div class="container">
-
-
-    <div class="page-header">
-        <h1>{{ title|default:"Личный блог" }}
-            <small>вариант 1.0</small>
-        </h1>
-    </div>
-
-    {% block content %}
-    {% endblock %}
-
-
-
-    <hr/>
-    <footer class="text-center">
-        &copy; 2016. Все права защищены
-    </footer>
-
-</div><!-- /.container -->
-=======
     <nav class="navbar navbar-inverse navbar-fixed-top">
      <div class="container">
        <div class="navbar-header">
@@ -100,6 +50,6 @@
        </footer>
 
    </div><!-- /.container -->
->>>>>>> 5b9e6c0b0a4570be83cea3b8d7da2f3a2ec53d6f
+
 </body>
 </html>
