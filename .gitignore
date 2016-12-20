@@ -1,5 +1,5 @@
-.idea/*
+.idea
 static/image
-__pycache__/*
+__pycache__
 
 
