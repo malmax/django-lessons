@@ -33,6 +33,7 @@ def getAboutMeInfo():
 
     return data
 
+
 class Organization(models.Model):
     title = models.CharField(max_length=100, unique=True, db_index=True)
     region = models.CharField(max_length=50, blank=True)
@@ -42,6 +43,7 @@ class Organization(models.Model):
     def __str__(self):
         return self.title
 
+
 class Works(models.Model):
     organization = models.ForeignKey(Organization)
     startDate = models.DateField()
@@ -49,7 +51,8 @@ class Works(models.Model):
     title = models.CharField(max_length=30, verbose_name="Должность")
 
     def __str__(self):
-        return self.organization + " " + self.title
+        return self.organization.title + " " + self.title
+
 
 class Learns(models.Model):
     imgName = models.CharField(max_length=30)
@@ -57,9 +60,9 @@ class Learns(models.Model):
     longTitle = models.TextField()
     website = models.URLField(blank=True)
 
+
 class Hobby(models.Model):
     title = models.CharField(max_length=40)
 
     def __str__(self):
         return self.title
-

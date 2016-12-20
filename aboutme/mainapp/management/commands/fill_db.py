@@ -14,4 +14,4 @@ class Command(BaseCommand):
         Learns.objects.all().delete()
 
         os.system("python manage.py loaddata data.json")
-
+        print("Import completed")

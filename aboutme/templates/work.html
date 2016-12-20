@@ -1,10 +1,16 @@
 {% extends 'base.html' %}
-{% load static %}
+{% load staticfiles %}
 
 {% block content %}
 
     <div >
-        <h1>Моя работа</h1>
+        <h1>Моя работа <small>{% if lastWork %} Последние 3 места работы {% endif %}</small></h1>
+
+
+        <form method="get" action="{% url "work" %}{% if not lastWork %}/lastwork {% endif %}">
+            <input type="checkbox" id="checkbox" {% if lastWork %}checked{% endif %} onclick="submit({})">
+            <label for="checkbox">Показать последние три места работы</label>
+        </form>
         {% for w in works %}
             <div class="panel panel-default">
               <div class="panel-heading">

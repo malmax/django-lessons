@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from mainapp.views import showAboutPage
+from mainapp.views import showAboutPage, showStudyPage, showWorkPage, showOrganization
 from mainapp.views import showStudyPage
 from mainapp.views import showWorkPage
 
@@ -23,5 +23,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', showAboutPage, name = 'home'),
     url(r'^learn/$', showStudyPage, name = 'learn'),
-    url(r'^work/$', showWorkPage,name = 'work')
+    url(r'^work/$', showWorkPage,name = 'work'),
+    url(r'^organization/(\d{1,2})$', showOrganization),
+    url(r'^work/(.*)$', showWorkPage),
 ]

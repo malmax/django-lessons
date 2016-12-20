@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block content %}
+
+<section class="row">
+    <div class="jumbotron">
+      <h2>{{ organization.title }}</h2>
+      <ul class="list-unstyled">
+          <li>Регион: {{ organization.region }}</li>
+          <li>Номер телефона: {{ organization.phone }}</li>
+          <li>Адрес: {{ organization.address }}</li>
+      </ul>
+    </div>
+</section>
+{% endblock %}
