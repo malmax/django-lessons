@@ -11,18 +11,22 @@
             </div>
             <div class="col-md-4 col-md-offset-2 media-right">
                 {{ birthday|date:"d M Y"|default:"дата рождения" }}
+
             </div>
             <div class="col-md-6">
                 Любимый вид спорта:
             </div>
             <div class="col-md-4 col-md-offset-2">
+
                 {{ hobby|join:", "|default:"нет" }}
+
             </div>
             <div class="col-md-6">
                 Любимый фильм:
             </div>
             <div class="col-md-4 col-md-offset-2">
                 {{ likeFilm|join:", "|default:"нет" }}
+
             </div>
         </div>
     </div>

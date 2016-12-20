@@ -1,4 +1,3 @@
-from django.db import models
 import logging
 from django.urls import reverse
 from datetime import date
@@ -32,17 +31,23 @@ def getAboutMeInfo():
     data['birthday'] = date(1984, 5, 5)
     # data['hobby'] = ['Большой теннис', 'Лыжи', 'Программирование']
     data['likeFilm'] = ['Форест Гамп']
-    # data['works'] = [{'employer': 'ООО \"Планета Игр\"', 'startDate':date(2010,6,1), 'title': 'Менеджер по работе с клиентами'},
-    #                  {'employer': 'ООО \"НьюсФлай\"', 'startDate': date(2005,1,1), 'title': 'Менеджер по работе с клиентами'}]
-    # data['learn'] = [{'imgName':'school.gif', 'shortTitle': 'Школа №40', 'longTitle': 'Школа №40 Приморского р-на Санкт-Петербурга','website':'http://licey40.siteedit.ru/'},
-    #                  {'imgName': 'univer.jpg', 'shortTitle': 'СПБГПУ', 'longTitle': 'Санкт-Петербургский Государственный Политехнический Университет','website':'http://www.spbstu.ru/'}]
+
     return data
 
+class Organization(models.Model):
+    title = models.CharField(max_length=100, unique=True, db_index=True)
+
+    def __str__(self):
+        return self.title
 
 class Works(models.Model):
+    organization = models.ForeignKey(Organization, null=True)
     employerName = models.CharField(max_length=30)
     startDate = models.DateField()
     title = models.CharField(max_length=30)
+
+    def __str__(self):
+        return self.employerName
 
 class Learns(models.Model):
     imgName = models.CharField(max_length=30)
@@ -55,3 +60,4 @@ class Hobby(models.Model):
 
     def __str__(self):
         return self.title
+
