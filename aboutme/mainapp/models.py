@@ -29,25 +29,27 @@ def getAboutMeInfo():
     data['firstName'] = 'Максим'
     data['thirdName'] = 'Анатольевич'
     data['birthday'] = date(1984, 5, 5)
-    # data['hobby'] = ['Большой теннис', 'Лыжи', 'Программирование']
     data['likeFilm'] = ['Форест Гамп']
 
     return data
 
 class Organization(models.Model):
     title = models.CharField(max_length=100, unique=True, db_index=True)
+    region = models.CharField(max_length=50, blank=True)
+    phone = models.CharField(max_length=20)
+    address = models.CharField(max_length=100)
 
     def __str__(self):
         return self.title
 
 class Works(models.Model):
-    organization = models.ForeignKey(Organization, null=True)
-    employerName = models.CharField(max_length=30)
+    organization = models.ForeignKey(Organization)
     startDate = models.DateField()
-    title = models.CharField(max_length=30)
+    endDate = models.DateField(blank=True, null=True)
+    title = models.CharField(max_length=30, verbose_name="Должность")
 
     def __str__(self):
-        return self.employerName
+        return self.organization + " " + self.title
 
 class Learns(models.Model):
     imgName = models.CharField(max_length=30)

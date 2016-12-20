@@ -1,7 +1,5 @@
-<<<<<<< HEAD
-.idea
+.idea/*
 static/image
-__pycache__
-=======
-.idea
->>>>>>> 7ee917b8041999fc95405a3b12b3b4c2d74a93d1
+__pycache__/*
+
+

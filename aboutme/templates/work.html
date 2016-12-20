@@ -7,7 +7,18 @@
         <h1>Моя работа</h1>
         {% for w in works %}
             <div class="panel panel-default">
-              <div class="panel-heading"><h4>{{ w.employerName|default:"ООО 'Рога и Копыта'" }} <small>( c {{ w.startDate|date:"d M Y"|default:"Дата неизвестна" }} )</small></h4></div>
+              <div class="panel-heading">
+                  <h4>
+                      <a href="/organization/{{ w.organization.pk }}">
+                          {{ w.organization|default:"ООО 'Рога и Копыта'" }}
+                      </a>
+
+                      <small>( c
+                          {{ w.startDate|date:"d M Y"|default:"Дата неизвестна" }}
+                          по {{ w.endDate|date:"d M Y"|default:"текущий момент" }})
+                      </small>
+                  </h4>
+              </div>
               <div class="panel-body">
                 Работал в должности {{ w.title|default:"Менеджер" }}
               </div>
