@@ -1,4 +1,5 @@
 from django.db import models
+from django.db import connections
 
 # Игра-продукт. Их будет много в одном дисплее
 class GameProduct(models.Model):
@@ -56,6 +57,44 @@ class GameProduct(models.Model):
     def updateStock(self):
         self.stock = self.stock
         self.canOrderSet(self, self.stock)
+
+    def __str__(self):
+        return self.title
+
+
+# Игра-дисплей. Это контейнер для продуктов и страница для их отображения
+class GameDisplay(models.Model):
+    title = models.CharField(max_length=150, verbose_name="Наименование игры, Battefield")
+    description = models.TextField(max_length=10000, blank=True, null=True, verbose_name="Описание")
+
+    def __str__(self):
+        return self.title
+
+
+# Термин Платформа
+class PlatformCategory(models.Model):
+    oldId = models.SmallIntegerField(verbose_name="Id термина на старом сайте", default=0)
+    title = models.CharField(max_length=100)
+    shortTitle = models.CharField(max_length=50, verbose_name="Краткое наименование")
+    alias = models.SlugField(verbose_name="URL")
+
+    @staticmethod
+    def getAllShortPlatformAlias(cache=[]):
+        if len(cache) == 0:
+            newgamebuy = connections['default'].cursor()
+            newgamebuy.execute("SELECT alias FROM %s WHERE 1" % PlatformCategory._meta.db_table)
+            for t in newgamebuy.fetchall():
+                cache.append(t[0])
+        return cache
+
+    def __str__(self):
+        return self.title
+
+
+# Термин Локализация
+class LanguageCategory(models.Model):
+    filterId = models.SmallIntegerField(verbose_name="Id для группировки", null=True, blank=True)
+    title = models.CharField(max_length=100)
 
     def __str__(self):
         return self.title
