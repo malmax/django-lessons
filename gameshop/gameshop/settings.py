@@ -38,7 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'shopbase',
-    'users'
+    'users',
+    'pages',
+    'migrate'
 ]
 
 MIDDLEWARE = [
@@ -57,7 +59,9 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [os.path.join(BASE_DIR, 'templates'),
-                 os.path.join(BASE_DIR, 'users', 'templates')]
+                 os.path.join(BASE_DIR, 'users', 'templates'),
+                 os.path.join(BASE_DIR, 'pages', 'templates'),
+                 os.path.join(BASE_DIR, 'migrate', 'templates')]
         ,
         'APP_DIRS': True,
         'OPTIONS': {
@@ -122,11 +126,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
-
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATICFILES_DIRS = [
      os.path.join(BASE_DIR, 'static'),
 ]
 
 MEDIA_URL = '/media/'
-
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

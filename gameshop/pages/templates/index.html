@@ -1,0 +1,119 @@
+{% extends 'base.html' %}
+{% block contentHeader %}
+    <h2>Новинки <small>самые свежие поступления в наш магазин</small></h2>
+{% endblock %}
+
+{% block content %}
+<section class="row">
+    <div class="container-3">
+        <article class="product">
+            <header>
+                <div>
+                    <img src="/media/covers/fifa-17-ps4_ps-4_cover.png" alt="" />
+                </div>
+                <div>
+                    <h3><a href="fifa17.html">Fifa 17 для PS4</a></h3>
+                </div>
+            </header>
+            <div class="price inline-block">3990р</div>
+            <div class="buybutton inline-block">
+                <input type="button" name="fifa17" value="купить" />
+            </div>
+
+        </article>
+    </div>
+
+    <div class="container-3">
+        <article class="product">
+            <header>
+                <div>
+                    <img src="/media/covers/battlefield-1-ps4_ps-4_cover.png" alt="" />
+                </div>
+                <div>
+                    <h3><a href="battlefield1.html">Battlefield 1 для PS4</a></h3>
+                </div>
+            </header>
+            <div class="price inline-block">3490р</div>
+            <div class="buybutton inline-block">
+                <input type="button" name="battlefield1" value="купить" />
+            </div>
+
+        </article>
+    </div>
+
+    <div class="container-3">
+        <article class="product">
+            <header>
+                <div>
+                    <img src="/media/covers/elder-scrolls-v-skyrim-special-edition-ps4_ps-4_cover.png" alt="" />
+                </div>
+                <div>
+                    <h3><a href="skyrimse.html">Skyrim Special Ed для PS4</a></h3>
+                </div>
+            </header>
+            <div class="price inline-block">2790р</div>
+            <div class="buybutton inline-block">
+                <input type="button" name="skyrim" value="купить" />
+            </div>
+
+        </article>
+    </div>
+
+    <div class="container-3">
+        <article class="product">
+            <header>
+                <div>
+                    <img src="/media/covers/uncharted-4-thiefs-end-ps4_ps-4_cover.png" alt="" />
+                </div>
+                <div>
+                    <h3><a href="uncharted.html">Uncharted 4: Путь вора (A Thief's End) для PS4</a></h3>
+                </div>
+            </header>
+            <div class="price inline-block">1990р</div>
+            <div class="buybutton inline-block">
+                <input type="button" name="uncharted" value="купить" />
+            </div>
+
+        </article>
+    </div>
+    <div class="container-3">
+        <article class="product">
+            <header>
+                <div>
+                    <img src="/media/covers/3-witcher-3-wild-hunt-goty-ps4_ps-4_cover.png" alt="" />
+                </div>
+                <div>
+                    <h3><a href="witcher.html">Ведьмак 3: Дикая Охота (Witcher 3: Wild Hunt) для PS4</a></h3>
+                </div>
+            </header>
+            <div class="price inline-block">3490р</div>
+            <div class="buybutton inline-block">
+                <input type="button" name="witcher" value="купить" />
+            </div>
+
+        </article>
+    </div>
+    <div class="container-3">
+        <article class="product">
+            <header>
+                <div>
+                    <img src="/media/covers/mafia-3-ps4_ps-4_cover.png" alt="" />
+                </div>
+                <div>
+                    <h3><a href="mafia.html">Mafia 3 (Мафия III) для PS4</a></h3>
+                </div>
+            </header>
+            <div class="price inline-block">1990р</div>
+            <div class="buybutton inline-block">
+                <input type="button" name="mafia" value="купить" />
+            </div>
+        </article>
+    </div>
+</section>
+{% endblock %}
+
+ {% block sidebar %}
+    <div class="container-3">
+        {% include 'sidebarCataloge.html' %}
+    </div>
+ {% endblock %}

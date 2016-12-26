@@ -13,13 +13,22 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import url
+from django.conf.urls import url, include
+from django.conf import settings
 from django.contrib import admin
 from users.views import login
+from django.views.static import serve
 
 urlpatterns = [
+    url(r'^',include('pages.urls')),
+    url(r'^migrate/',include('migrate.urls')),
     url(r'^admin/', admin.site.urls),
     url(r'^users/login', login, name = "userLogin"),
     url(r'^users/logout', login, name="userLogout"),
 
 ]
+
+# костыль для работы с media так и не понял ничего про static_root и перенос из медиа на продакшене
+if settings.DEBUG:
+    # static files (images, css, javascript, etc.)
+    urlpatterns.append(url(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}))

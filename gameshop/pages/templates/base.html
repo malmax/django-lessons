@@ -1,0 +1,63 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1024, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{% block title %} - магазин видеоигр GameShop{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css'%}" media="screen" title="no title">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <div class="logo container-6">
+                <img src="{% static 'images/Logomakr_1d6a6R.png' %}" />
+            </div>
+            <div class="search-block container-6">
+
+                {% include 'secondaryMenu.html' %}
+
+                <form action="sendform.php">
+                    <input type="text" name="search" placeholder="Введите название игры, например, GTA 5">
+                    <input type="submit" value="&#128269;">
+                </form>
+            </div>
+            <div class="clear"></div>
+
+            {% include 'primaryMenu.html' %}
+
+        </header>
+        <hr>
+        <section>
+            <div class="container-9">
+                <img src="/media/banners/cod_iw_pre_688x400.jpg" alt="Call of Duty Preorder" />
+            </div>
+            <div class="container-3">
+                <img src="http://placehold.it/225x185" />
+                <img src="http://placehold.it/225x185" />
+            </div>
+            <div class="clear"></div>
+            <article>
+                <header>
+                    {% block contentHeader %}{% endblock %}
+                </header>
+                <section class="catalog">
+                    {% block sidebar %}{% endblock %}
+
+                    {% block content %}{% endblock %}
+                </section>
+
+
+            </article>
+        </section>
+        <hr>
+        <footer>
+            &copy; Все права защищены
+        </footer>
+    </div>
+</body>
+
+</html>

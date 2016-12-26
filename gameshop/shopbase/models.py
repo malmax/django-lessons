@@ -70,7 +70,6 @@ class GameDisplay(models.Model):
     def __str__(self):
         return self.title
 
-
 # Термин Платформа
 class PlatformCategory(models.Model):
     oldId = models.SmallIntegerField(verbose_name="Id термина на старом сайте", default=0)
@@ -78,7 +77,6 @@ class PlatformCategory(models.Model):
     shortTitle = models.CharField(max_length=50, verbose_name="Краткое наименование")
     alias = models.SlugField(verbose_name="URL")
 
-    @staticmethod
     def getAllShortPlatformAlias(cache=[]):
         if len(cache) == 0:
             newgamebuy = connections['default'].cursor()
@@ -89,7 +87,6 @@ class PlatformCategory(models.Model):
 
     def __str__(self):
         return self.title
-
 
 # Термин Локализация
 class LanguageCategory(models.Model):
