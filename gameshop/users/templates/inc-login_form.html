@@ -1,16 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
 <div class="navbar navbar-default col-md-3">
     {% if user.is_authenticated %}
         <p>Привет, {{ user.username }}</p>
-        <a href="{% url "userLogout" %}">logout</a>
+        <a href="{% url "logoutUser" %}">logout</a>
     {% else %}
         {% if errors %}
             Неправильная пара логин / пароль
         {% endif %}
-<form action="{% url "userLogin" %}" method="post" class="navbar-form navbar-right login-form">
+<form action="{% url "loginUser" %}" method="post" class="navbar-form navbar-right login-form">
     {% csrf_token %}
     <input type="text" name="login" id="login" placeholder="Логин">
     <input type="password" name="password" id="password" placeholder="Пароль">
-    <button class="btn btn-default" type="submit"></button>
+    <button class="btn btn-default" type="submit">Логин</button>
 </form>
     {% endif %}
 </div>
+{% endblock %}

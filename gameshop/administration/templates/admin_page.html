@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="row">
+        <div class="col-md-6">
+            Пользователи:
+            <ul id="users">
+                {% for user in users %}
+                    <li>{{ user }}
+                        <button type="button" class="btn btn-default" aria-label="Edit">
+                 <span class="glyphicon glyphicon-credit-card" aria-hidden="true"></span>
+                        </button>
+                        <a href="delete/user/{{ user.id }}" class="btn btn-default">
+                 <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endblock %}

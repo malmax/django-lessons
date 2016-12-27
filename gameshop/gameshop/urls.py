@@ -22,7 +22,7 @@ from django.views.static import serve
 urlpatterns = [
     url(r'^',include('pages.urls')),
     url(r'^migrate/',include('migrate.urls')),
-    url(r'^admin/', admin.site.urls),
+    url(r'^admin/', include('administration.urls')),
     url(r'^users/', include('users.urls')),
 ]
 

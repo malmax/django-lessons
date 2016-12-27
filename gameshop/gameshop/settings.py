@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'shopbase',
     'users',
     'pages',
-    'migrate'
+    'migrate',
+    'administration'
 ]
 
 MIDDLEWARE = [
@@ -61,7 +62,8 @@ TEMPLATES = [
         'DIRS': [os.path.join(BASE_DIR, 'templates'),
                  os.path.join(BASE_DIR, 'users', 'templates'),
                  os.path.join(BASE_DIR, 'pages', 'templates'),
-                 os.path.join(BASE_DIR, 'migrate', 'templates')]
+                 os.path.join(BASE_DIR, 'migrate', 'templates'),
+                 os.path.join(BASE_DIR, 'administration', 'templates')]
         ,
         'APP_DIRS': True,
         'OPTIONS': {

@@ -15,8 +15,8 @@
                     <td class="text-center"><p>{{ item.old_count }}</p></td>
                     <td class="text-center">{{ item.new_count }}</td>
                     <td class="text-right">{% if item.action %}
-                        <a href="/import/{{ item.action }}/import" class="btn btn-primary">имортировать</a>
-                        <a href="/import/{{ item.action }}/del" onclick="if(confirm()) return true; else return false;" class="btn btn-danger">удалить</a>
+                        <a href="/migrate/{{ item.action }}/import" class="btn btn-primary">имортировать</a>
+                        <a href="/migrate/{{ item.action }}/del" onclick="if(confirm()) return true; else return false;" class="btn btn-danger">удалить</a>
                     {% else %}
                         нет действий
                     {% endif %}

@@ -73,7 +73,7 @@ def _showImportHelper(sqlOld, sqlNew, url, title):
 
 
 def importPlatform(request):
-    oldgamebuy = connections['oldgamebuy'].cursor()
+    oldgamebuy = getConnection()
     newgamebuy = connections['default'].cursor()
     # ТАБЛИЦА ПЛАТФОРМА
     oldgamebuy.execute("SELECT gtd.tid,gtd.name,gtd.description FROM gb_term_data gtd WHERE gtd.vid = 2;")
@@ -132,7 +132,7 @@ def importPlatform(request):
     newgamebuy.close()
 
     request.session['message'] = '\n'.join(html)
-    return redirect("/import")
+    return redirect("/migrate/")
 
 
 # чистим таблицу Платформа
@@ -152,14 +152,16 @@ def importPlatformDel(request):
     except:
         html.append("произошла ошибка при удалении")
         request.session['message'] = '\n'.join(html)
-        redirect("/import")
+        redirect("/migrate/")
     finally:
         html.append("Термины и языки успешно удалены")
-        newgamebuy.execute("ALTER TABLE %s AUTO_INCREMENT = 1;" % PlatformCategory._meta.db_table)
-        newgamebuy.execute("ALTER TABLE %s AUTO_INCREMENT = 1;" % LanguageCategory._meta.db_table)
+        # newgamebuy.execute("ALTER TABLE %s AUTO_INCREMENT = 1;" % PlatformCategory._meta.db_table)
+        newgamebuy.execute("UPDATE SQLITE_SEQUENCE SET SEQ=0 WHERE NAME='%s';" % PlatformCategory._meta.db_table)
+        # newgamebuy.execute("ALTER TABLE %s AUTO_INCREMENT = 1;" % LanguageCategory._meta.db_table)
+        newgamebuy.execute("UPDATE SQLITE_SEQUENCE SET SEQ=0 WHERE NAME='%s';" % LanguageCategory._meta.db_table)
 
     request.session['message'] = '\n'.join(html)
-    return redirect("/import")
+    return redirect("/migrate/")
 
 #import GameProducts
 def importGameProducts(request):
@@ -167,7 +169,7 @@ def importGameProducts(request):
     migrate.migrate()
     request.session['message'] = '\n'.join(migrate.html)
     del migrate
-    return redirect("/import")
+    return redirect("/migrate/")
 
 
 # delete gameproducts
@@ -176,4 +178,4 @@ def importGameProductsDel(request):
     migrate.delMigration()
     request.session['message'] = '\n'.join(migrate.html)
     del migrate
-    return redirect("/import")
+    return redirect("/migrate/")

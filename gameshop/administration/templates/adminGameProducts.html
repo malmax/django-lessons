@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+    {% for game in games %}
+        <li><a href="{% url 'adminGameDetail' game.pk %}">{{ game.title }}</a></li>
+    {% endfor %}
+    <div class="pagination">
+        <spn class="step-links">
+            {% if games.has_previous %}
+                <a href="?page={{ games.previous_page_number }}">Назад</a>
+            {% endif %}
+            <span class="current"> {{ games.number }} из {{ games.paginator.num_pages }}</span>
+            {% if games.has_next %}
+                <a href="?page={{ games.next_page_number }}">Вперед</a>
+            {% endif %}
+        </spn>
+    </div>
+{% endblock %}
