@@ -6,7 +6,8 @@ from django.http import HttpResponse
 from django.shortcuts import render_to_response, redirect
 import traceback
 
-import pymysql
+ # секретный ключ
+from migrate.secret import getConnection
 
 
 
@@ -35,25 +36,9 @@ def showImport(request):
 
 # helper to fill array for table import information
 def _showImportHelper(sqlOld, sqlNew, url, title):
-    # connecting
-    oldgamebuyDb = {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'gamebuy',
-        'USER': 'gamebuyremote',
-        'PASSWORD': 'W6b5V9j0',
-        'HOST': '185.63.188.130',
-        'PORT': '3306',
-        'sql_mode': 'STRICT_TRANS_TABLES',
-    }
 
-    oldgamebuy = pymysql.connect(host="185.63.188.130",    # your host, usually localhost
-                     user="gamebuyremote",         # your username
-                     passwd="W6b5V9j0",  # your password
-                     db="gamebuy").cursor()        # name of the data base
-        # connections[oldgamebuyDb].cursor()
+    oldgamebuy = getConnection()
     newgamebuy = connections['default'].cursor()
-
-
 
     oldСount = newСount = 0
     action = trСlass = ""

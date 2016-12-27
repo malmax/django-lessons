@@ -1,7 +1,16 @@
 <nav class="secondary-menu menu-item">
     <ul>
-        <li><a href="#">О магазине</a></li>
-        <li><a href="#">Доставка и оплата</a></li>
-        <li><a href="#">Контакты</a></li>
+        <li class="nav-item">
+            <a class="nav-link" href="/admin/">Админка</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/migrate/import/">Миграция</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'loginUser' %}">Войти</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'registerUser' %}">Регистрация</a>
+        </li>
     </ul>
 </nav>

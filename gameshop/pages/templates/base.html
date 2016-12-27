@@ -6,7 +6,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=1024, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>{% block title %} - магазин видеоигр GameShop{% endblock %}</title>
+    <title>{% block title %}магазин видеоигр GameShop{% endblock %}</title>
+
     <link rel="stylesheet" href="{% static 'css/style.css'%}" media="screen" title="no title">
 </head>
 
@@ -32,14 +33,9 @@
         </header>
         <hr>
         <section>
-            <div class="container-9">
-                <img src="/media/banners/cod_iw_pre_688x400.jpg" alt="Call of Duty Preorder" />
-            </div>
-            <div class="container-3">
-                <img src="http://placehold.it/225x185" />
-                <img src="http://placehold.it/225x185" />
-            </div>
-            <div class="clear"></div>
+            {% block topContent %}
+
+            {% endblock %}
             <article>
                 <header>
                     {% block contentHeader %}{% endblock %}

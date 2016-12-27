@@ -23,9 +23,7 @@ urlpatterns = [
     url(r'^',include('pages.urls')),
     url(r'^migrate/',include('migrate.urls')),
     url(r'^admin/', admin.site.urls),
-    url(r'^users/login', login, name = "userLogin"),
-    url(r'^users/logout', login, name="userLogout"),
-
+    url(r'^users/', include('users.urls')),
 ]
 
 # костыль для работы с media так и не понял ничего про static_root и перенос из медиа на продакшене

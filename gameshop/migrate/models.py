@@ -7,13 +7,15 @@ from urllib.request import Request, urlopen
 from django.core.files import File
 from django.core.files.temp import TemporaryFile
 
+from migrate.secret import getConnection
+
 consolelog = logging.getLogger("console")
 
 class GameMigrate():
     html, existingNids = [], []
 
     def __init__(self):
-        self.oldgamebuy = connections['oldgamebuy'].cursor()
+        self.oldgamebuy = getConnection()
         self.newgamebuy = connections['default'].cursor()
         # заполняем existingNids
         self.newgamebuy.execute("SELECT old_nid FROM %s WHERE 1" % GameProduct._meta.db_table)
