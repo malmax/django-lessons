@@ -1,4 +1,4 @@
-from shopbase.models import PlatformCategory, GameProduct, LanguageCategory
+from shopbase.models import PlatformCategory, GameProduct, LanguageCategory, GenreCategory
 from .models import GameMigrate
 
 from django.db import connections, connection
@@ -25,11 +25,22 @@ def showImport(request):
     newSql = "SELECT COUNT(id) FROM %s;" % PlatformCategory._meta.db_table
 
     out.append(_showImportHelper(sqlOld=oldSql, sqlNew=newSql, url="platforma", title="Термин платформа и язык"))
+
+
+
     # Игры - продукты
     oldSql = "SELECT COUNT(gn.nid) FROM gb_node gn WHERE gn.type = 'game'"
     newSql = "SELECT COUNT(id) FROM %s;" % GameProduct._meta.db_table
 
     out.append(_showImportHelper(sqlOld=oldSql, sqlNew=newSql, url="gameproduct", title="Игры продукты"))
+
+
+    # Жанры
+    oldSql = "SELECT COUNT(gtd.tid) FROM gb_term_data gtd WHERE gtd.vid = 4;"
+    newSql = "SELECT COUNT(id) FROM %s;" % GenreCategory._meta.db_table
+
+    out.append(_showImportHelper(sqlOld=oldSql, sqlNew=newSql, url="genre", title="Жанры"))
+
 
     return render(request, 'import.html', {"title": "Импорт из gamebuy.ru", "data_import": out, "message": message})
 
@@ -162,6 +173,86 @@ def importPlatformDel(request):
 
     request.session['message'] = '\n'.join(html)
     return HttpResponseRedirect("/migrate/")
+
+
+def importGenre(request):
+    oldgamebuy = getConnection()
+    newgamebuy = connections['default'].cursor()
+    # ТАБЛИЦА Жанры
+    oldgamebuy.execute("SELECT gtd.tid,gtd.name,gtd.description FROM gb_term_data gtd WHERE gtd.vid = 4;")
+    data = oldgamebuy.fetchall()
+    # print the rows
+    html = []
+    count = 0
+
+    try:
+        html.append("Удаляем термины Жанр")
+        importGenreDel(request)
+        html.append("Добавляем элементы Жанр")
+
+        for row in data:
+            term = GenreCategory(oldId=row[0], title=row[1], description=row[2])
+            term.save()
+            count += 1
+
+    except:
+        html.append(traceback.format_exc())
+        return HttpResponse('\n'.join(html))
+    finally:
+        html.append("Добавили {} записей в таблицу GenreCategory".format(count))
+
+    # Начинаем перезапись жанра в Игры
+    oldgamebuy.execute('''SELECT gn.nid, term.tid FROM gb_term_node term
+LEFT JOIN gb_node gn ON term.vid = gn.vid
+WHERE term.tid IN (SELECT tid FROM gb_term_data gtd WHERE gtd.vid = 4)''')
+    data = oldgamebuy.fetchall()
+
+    # получаем связь старого жанра с новым
+    oldIdInTerms = {}
+    for t in GenreCategory.objects.all():
+        oldIdInTerms[t.oldId] = t.pk
+
+    # получаем все pk жанры для оперделенного nid
+    terms = {}
+    for row in data:
+        if terms[row[0]] != None:
+            terms[row[0]].append(oldIdInTerms[row[1]])
+        else:
+            terms[row[0]] = [oldIdInTerms[row[1]]]
+
+    print(terms)
+
+    # close the cursor object
+    oldgamebuy.close()
+    newgamebuy.close()
+
+    request.session['message'] = '\n'.join(html)
+    return HttpResponseRedirect("/migrate/")
+
+
+# чистим таблицу Платформа
+def importGenreDel(request):
+    newgamebuy = connections['default'].cursor()
+    html = []
+    # if 'message' in request.session:
+    #     html.append = request.session['message']
+    #     del request.session['message']
+    # clear platformCategory table
+    try:
+        html.append("Пытаемся удалить термины жанров")
+        GenreCategory.objects.all().delete()
+    except:
+        html.append("произошла ошибка при удалении")
+        request.session['message'] = '\n'.join(html)
+        return HttpResponseRedirect("/migrate/")
+    finally:
+        html.append("Жанры успешно удалены")
+        # newgamebuy.execute("ALTER TABLE %s AUTO_INCREMENT = 1;" % PlatformCategory._meta.db_table)
+        newgamebuy.execute("UPDATE SQLITE_SEQUENCE SET SEQ=0 WHERE NAME='%s';" % GenreCategory._meta.db_table)
+
+    request.session['message'] = '\n'.join(html)
+    return HttpResponseRedirect("/migrate/")
+
 
 #import GameProducts
 def importGameProducts(request):

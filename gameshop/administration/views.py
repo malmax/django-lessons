@@ -8,7 +8,7 @@ from .forms import *
 def admin_page(request):
     # TODO: сделать доступ у админке только суперпользователю
     users = User.objects.all()
-    return render(request, 'admin_page.html', {'users': users})
+    return render(request, 'adminPage.html', {'users': users})
 
 
 def delete_user(request, user_id):

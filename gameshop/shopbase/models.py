@@ -32,6 +32,7 @@ class GameProduct(models.Model):
                     (100, "Трилогия"),  # TODO: удалить на рабочем сайте
                     (101, "DS")]  # TODO: удалить на рабочем сайте
     gameType = models.SmallIntegerField(choices=GAMETYPE_ARR, blank=True, null=True, default=None)
+    genre = models.ManyToManyField('GenreCategory')
 
     def gametypeSet(self, text):
         if text is not None:
@@ -60,6 +61,10 @@ class GameProduct(models.Model):
 
     def __str__(self):
         return self.title
+
+    def getUrlForCover(self):
+        fileName = self.cover.name.split('/')[-1]
+        return 'https://www.gamebuy.ru/sites/default/files/imagecache/image280x280_cover/files/' + fileName
 
 
 # Игра-дисплей. Это контейнер для продуктов и страница для их отображения
@@ -94,6 +99,17 @@ class PlatformCategory(models.Model):
 class LanguageCategory(models.Model):
     filterId = models.SmallIntegerField(verbose_name="Id для группировки", null=True, blank=True)
     title = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.title
+
+
+# Термин Жанр
+class GenreCategory(models.Model):
+    title = models.CharField(max_length=100)
+    oldId = models.SmallIntegerField(verbose_name="Id термина на старом сайте", default=0)
+    description = models.CharField(max_length=100, verbose_name="Описание", blank=True)
+    alias = models.SlugField(verbose_name="URL", blank=True)
 
     def __str__(self):
         return self.title

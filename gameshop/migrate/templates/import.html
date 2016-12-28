@@ -11,12 +11,12 @@
             </tr>
             {% for item in data_import %}
                 <tr class="{{ item.tr_class|default:"info" }}">
-                    <td><h4>{{ item.title }}</h4></td>
+                    <td><h5>{{ item.title }}</h5></td>
                     <td class="text-center"><p>{{ item.old_count }}</p></td>
                     <td class="text-center">{{ item.new_count }}</td>
                     <td class="text-right">{% if item.action %}
-                        <a href="/migrate/{{ item.action }}/import" class="btn btn-primary">имортировать</a>
-                        <a href="/migrate/{{ item.action }}/del" onclick="if(confirm()) return true; else return false;" class="btn btn-danger">удалить</a>
+                        <a href="/migrate/{{ item.action }}/import" class="btn btn-sm btn-primary">импорт</a>
+                        <a href="/migrate/{{ item.action }}/del" onclick="if(confirm()) return true; else return false;" class="btn btn-sm btn-danger">удалить</a>
                     {% else %}
                         нет действий
                     {% endif %}
@@ -26,3 +26,5 @@
         </table>
     </article>
 {% endblock content %}
+
+{% block nosidebar %}{% endblock %}

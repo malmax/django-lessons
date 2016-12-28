@@ -1,6 +1,21 @@
 {% extends 'base.html' %}
 {% block content %}
 
-    {{ game }}
+    <div class="row">
+        <div class="col-md-4">
+            <img src="{{ game.getUrlForCover }}" alt="" class="img-fluid">
+        </div>
+    <div class="col-md-6">
+        <h2>{{ game }}</h2>
+        <ul>
+            <li>Жанр: {{ game. }}</li>
+        </ul>
 
+    </div>
+    </div>
+
+
+{% endblock %}
+{% block sidebar %}
+    {% include 'adminSidebar.html' %}
 {% endblock %}

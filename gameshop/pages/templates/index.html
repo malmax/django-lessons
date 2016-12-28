@@ -9,14 +9,13 @@
 {% endblock %}
 
 {% block topContent %}
-<div class="col-md-9">
+<div class="col-md-8">
     <img src="/media/banners/cod_iw_pre_688x400.jpg" alt="Call of Duty Preorder" class="img-fluid" />
 </div>
-<div class="col-md-3">
-    <img src="http://placehold.it/225x185" />
-    <img src="http://placehold.it/225x185" />
+<div class="col-md-4">
+    <img src="http://placehold.it/340x200" class="img-fluid" />
+    <img src="http://placehold.it/340x200" class="img-fluid" />
 </div>
-<div class="clear"></div>
 {% endblock %}
 
 {% block content %}
@@ -129,7 +128,5 @@
 {% endblock %}
 
  {% block sidebar %}
-    <div class="col-md-3">
-        {% include 'sidebarCataloge.html' %}
-    </div>
+    {% include 'sidebarCataloge.html' %}
  {% endblock %}
