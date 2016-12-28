@@ -203,7 +203,8 @@ def importGenre(request):
 
     # Начинаем перезапись жанра в Игры
     oldgamebuy.execute('''SELECT gn.nid, term.tid FROM gb_term_node term
-LEFT JOIN gb_node gn ON term.vid = gn.vid
+LEFT JOIN gb_content_field_game_base gcfgb ON term.nid = gcfgb.field_game_base_nid
+LEFT JOIN gb_node gn ON gcfgb.vid = gn.vid
 WHERE term.tid IN (SELECT tid FROM gb_term_data gtd WHERE gtd.vid = 4)''')
     data = oldgamebuy.fetchall()
 
@@ -215,12 +216,19 @@ WHERE term.tid IN (SELECT tid FROM gb_term_data gtd WHERE gtd.vid = 4)''')
     # получаем все pk жанры для оперделенного nid
     terms = {}
     for row in data:
-        if terms[row[0]] != None:
+        if row[0] in terms:
             terms[row[0]].append(oldIdInTerms[row[1]])
         else:
             terms[row[0]] = [oldIdInTerms[row[1]]]
 
-    print(terms)
+    for term in terms:
+        pass
+
+
+
+
+
+
 
     # close the cursor object
     oldgamebuy.close()
