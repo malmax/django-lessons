@@ -3,7 +3,7 @@ from .models import GameMigrate
 
 from django.db import connections, connection
 from django.http import HttpResponse
-from django.shortcuts import render_to_response, redirect
+from django.shortcuts import HttpResponseRedirect, render
 import traceback
 
  # секретный ключ
@@ -31,7 +31,7 @@ def showImport(request):
 
     out.append(_showImportHelper(sqlOld=oldSql, sqlNew=newSql, url="gameproduct", title="Игры продукты"))
 
-    return render_to_response('import.html', {"title": "Импорт из gamebuy.ru", "data_import": out, "message": message})
+    return render(request, 'import.html', {"title": "Импорт из gamebuy.ru", "data_import": out, "message": message})
 
 
 # helper to fill array for table import information
@@ -132,7 +132,7 @@ def importPlatform(request):
     newgamebuy.close()
 
     request.session['message'] = '\n'.join(html)
-    return redirect("/migrate/")
+    return HttpResponseRedirect("/migrate/")
 
 
 # чистим таблицу Платформа
@@ -152,7 +152,7 @@ def importPlatformDel(request):
     except:
         html.append("произошла ошибка при удалении")
         request.session['message'] = '\n'.join(html)
-        redirect("/migrate/")
+        return HttpResponseRedirect("/migrate/")
     finally:
         html.append("Термины и языки успешно удалены")
         # newgamebuy.execute("ALTER TABLE %s AUTO_INCREMENT = 1;" % PlatformCategory._meta.db_table)
@@ -161,7 +161,7 @@ def importPlatformDel(request):
         newgamebuy.execute("UPDATE SQLITE_SEQUENCE SET SEQ=0 WHERE NAME='%s';" % LanguageCategory._meta.db_table)
 
     request.session['message'] = '\n'.join(html)
-    return redirect("/migrate/")
+    return HttpResponseRedirect("/migrate/")
 
 #import GameProducts
 def importGameProducts(request):
@@ -169,7 +169,7 @@ def importGameProducts(request):
     migrate.migrate()
     request.session['message'] = '\n'.join(migrate.html)
     del migrate
-    return redirect("/migrate/")
+    return HttpResponseRedirect("/migrate/")
 
 
 # delete gameproducts
@@ -178,4 +178,4 @@ def importGameProductsDel(request):
     migrate.delMigration()
     request.session['message'] = '\n'.join(migrate.html)
     del migrate
-    return redirect("/migrate/")
+    return HttpResponseRedirect("/migrate/")

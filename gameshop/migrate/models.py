@@ -143,6 +143,7 @@ class GameMigrate():
             title += " [" + platform.shortTitle + "]"
             game.title = title.replace('  ',' ',5)
 
+            # копирование картинок
             try:
                 img_temp = TemporaryFile()
                 filename = str(row[10]).split("/")[-1] or ("cover%s.jpg" % (row[0]))
