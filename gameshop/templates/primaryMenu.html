@@ -1,3 +1,4 @@
+{% load staticfiles %}
 <nav class="navbar navbar-dark bg-inverse primary-menu">
     <div class="container">
         <ul class="nav navbar-nav">
@@ -18,7 +19,7 @@
                 <a class="nav-link" href="#">Xbox 360</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Nintendo</a>
+                <a class="nav-link" href="#"><img src="{% static 'icons/wiiuIcon.svg' %}" alt="" class="img-fluid">Nintendo</a>
             </li>
         </ul>
     </div>

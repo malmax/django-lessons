@@ -4,7 +4,7 @@ from .models import GameMigrate
 from django.db import connections, connection
 from django.http import HttpResponse
 from django.shortcuts import HttpResponseRedirect, render
-import traceback
+import traceback, sys
 
  # секретный ключ
 from migrate.secret import getConnection
@@ -214,6 +214,7 @@ WHERE term.tid IN (SELECT tid FROM gb_term_data gtd WHERE gtd.vid = 4)''')
         oldIdInTerms[t.oldId] = t.pk
 
     # получаем все pk жанры для оперделенного nid
+    # terms[GameProduct.oldId] = [Genre.pk. Genre.pk ...]
     terms = {}
     for row in data:
         if row[0] in terms:
@@ -221,8 +222,19 @@ WHERE term.tid IN (SELECT tid FROM gb_term_data gtd WHERE gtd.vid = 4)''')
         else:
             terms[row[0]] = [oldIdInTerms[row[1]]]
 
-    for term in terms:
-        pass
+    for gameId in terms:
+        term = terms[gameId]
+        g = 0
+        try:
+            game = GameProduct.objects.filter(old_nid=gameId).first()
+            if game is not None:
+                game.genre.all().delete()
+                for g in term:
+                    game.genre.add(g)
+                game.save()
+        except:
+            print("Ошибка при добавлении жанра {} к игре {}({}): {}".format(g, gameId, game,sys.exc_info()[0]), flush=True)
+            html.append(traceback.format_exc())
 
 
 
