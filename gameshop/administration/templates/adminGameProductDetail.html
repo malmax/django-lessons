@@ -6,9 +6,23 @@
             <img src="{{ game.getUrlForCover }}" alt="" class="img-fluid">
         </div>
     <div class="col-md-6">
-        <h2>{{ game }}</h2>
-        <ul>
-            <li>Жанр: {{ game. }}</li>
+        <h3>{{ game.title }} {% if game.used %}(Б/У){% endif %}</h3>
+        <ul class="list-unstyled">
+            <li>Жанр:
+                {% for g in game.genre.all %}
+                    <a href="/games/genre/{{ g.pk }}">{{ g.title }}</a>
+                {% endfor %}
+            </li>
+            <li>Язык: {{ game.language|safe }}</li>
+            <li>Стоимость: {{ game.price }}</li>
+            <li>Дата выхода: {{ game.releaseDate }}</li>
+            {% if game.commingDate %}
+                <li>Дата поступления: {{ game.commingDate }}</li>
+            {% endif %}
+            <li>Состояние: {% if game.used %}Б/У{% else %}новая{% endif %}</li>
+            {% if game.gameType %}
+                <li>Тип издания: {{ game.gametypeGet }}</li>
+            {% endif %}
         </ul>
 
     </div>

@@ -60,11 +60,25 @@ class GameProduct(models.Model):
         self.canOrderSet(self, self.stock)
 
     def __str__(self):
+        if self.used:
+            return self.title + "(Б/У)"
         return self.title
 
     def getUrlForCover(self):
         fileName = self.cover.name.split('/')[-1]
         return 'https://www.gamebuy.ru/sites/default/files/imagecache/image280x280_cover/files/' + fileName
+
+    def getAllGenres(self, platformPk = None):
+        if platformPk:
+            genres = GameProduct.objects.filter(platformCategory__pk = platformPk).values('genre').distinct()
+        else:
+            genres = GameProduct.objects.values('genre').distinct()
+
+        result = []
+        for genre in genres:
+            result.append(GenreCategory.objects.get(pk=genre['genre']))
+
+        return result
 
 
 # Игра-дисплей. Это контейнер для продуктов и страница для их отображения
